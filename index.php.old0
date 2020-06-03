@@ -1,0 +1,44 @@
+<?php
+
+function greet($name, $color) {
+    
+    echo "Hello, my name is " . $name . " and my favorite color is " . $color . "<br>"; 
+
+}
+
+greet("Jacob", "blue");
+greet("Jane", "red");
+
+?>
+
+<h1><?= bloginfo('name'); ?></h1>
+<p><?= bloginfo('description'); ?></p>
+
+<ol>
+<?php
+#WHile Loop example
+    $count = 1;
+
+    while($count < 11) {
+?>
+    <li><?= $count ?></li>
+<?php
+        $count++;
+    }
+?>
+</ol>
+
+<?php
+#array and looping
+
+    $names = array("Jacob", "John", "Jane", "Barker");
+
+    $count = 0;
+
+    while($count < count($names)) {
+    
+        echo "<li> The name is $names[$count]</li>";
+        $count++;
+    }
+?>
+

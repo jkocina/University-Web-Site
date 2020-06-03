@@ -1,0 +1,37 @@
+/*
+    Theme Name: University Theme
+    Author: Jacob
+    Version: 1.0
+
+*/
+
+/* 3rd party packages */
+@import "css/normalize.css";
+@import "css/slick-carousel/slick/slick.css";
+
+/* SASS and Global'ish Stuff */
+@import "css/base/variables";
+@import "css/base/baseline";
+@import "css/base/utility-classes";
+
+/* BEM Blocks */
+@import "css/modules/shame";
+@import "css/modules/login";
+@import "css/modules/btn";
+@import "css/modules/my-notes";
+@import "css/modules/site-header";
+@import "css/modules/site-footer";
+@import "css/modules/main-navigation";
+@import "css/modules/page-banner";
+@import "css/modules/hero-slider";
+@import "css/modules/search-overlay";
+@import "css/modules/professor-card";
+@import "css/modules/headline";
+@import "css/modules/generic-content";
+@import "css/modules/full-width-split";
+@import "css/modules/event-summary";
+@import "css/modules/page-links";
+@import "css/modules/acf-map";
+@import "css/modules/link-list";
+@import "css/modules/metabox";
+@import "css/modules/post-item";
