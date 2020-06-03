@@ -1,4 +1,4 @@
-##Triumph University
+##Cram-IT University
 
 This theme is for a university. 
 
