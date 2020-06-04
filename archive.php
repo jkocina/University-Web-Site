@@ -12,15 +12,11 @@
 <?php
 
     the_archive_title();
-
+    //This is all about discerning between categories and authors
     // if (is_category())  {
-        
     //     single_cat_title();
-
     // } else if (is_author()) {
-
     //     the_author();
-        
     // }
 ?>
       </h1>
