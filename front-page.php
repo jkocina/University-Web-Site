@@ -43,17 +43,33 @@
 ?>
           <div class="event-summary">
             <a class="event-summary__date t-center" href="#">
-              <span class="event-summary__month"><?php the_time('M') ?></span>
-              <span class="event-summary__day"><?php the_time('d') ?></span>  
+              <span class="event-summary__month">
+<?php
+    //the_field and get_field are custom funtions made available be the Custom Fields plugin. 
+    //the_fiels will echo out the field and get_field will just return it
+    $eventDate = new DateTime(get_field('event_date'));
+    echo $eventDate->format('M');
+    //the_time('M') 
+?>            
+              </span>
+              <span class="event-summary__day">
+<?php 
+    //the_field and get_field are custom funtions made available be the Custom Fields plugin. 
+    //the_fiels will echo out the field and get_field will just return it
+    $eventDate = new DateTime(get_field('event_date'));
+    echo $eventDate->format('d'); 
+    //the_time('d') 
+?>
+              </span>  
             </a>
             <div class="event-summary__content">
               <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h5>
               <p>
 <?php
     if(has_excerpt()) {
-      echo wp_trim_words(get_the_excerpt(), 21);  //the_excerpt() will echo it out with a p tag
+      echo wp_trim_words(get_the_excerpt(), 21);  //using the_excerpt() will echo it out with a p tag
     } else {
-      echo wp_trim_words(get_the_content(), 21); //he_content() will echo it out with a p tag
+      echo wp_trim_words(get_the_content(), 21); //using the_content() will echo it out with a p tag
     }      
 ?>              
                 <a href="<?php the_permalink() ?>" class="nu gray">Learn more</a></p>
