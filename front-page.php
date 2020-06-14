@@ -33,8 +33,11 @@
 <?php
     
     $homepageEvents = new WP_Query(array(
-          'posts_per_page' => 2,
-          'post_type' => 'event'
+          'posts_per_page' => -1, // -1 means all 
+          'post_type' => 'event',
+          'meta_key' => 'event_date', //to sort by the date Custom Field
+          'orderby' => 'meta_value_num', // title for the title of the post, post-date is the default, use rand for random, use meta_value to sort by a custom field (like the date custom field we created)
+          'order' => 'ASC' //default is DESC
     )); 
 
     while($homepageEvents->have_posts()) {
