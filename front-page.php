@@ -32,12 +32,22 @@
         <h2 class="headline headline--small-plus t-center">Upcoming Events</h2> 
 <?php
     
+    $today = date('Ymd');
+
     $homepageEvents = new WP_Query(array(
-          'posts_per_page' => -1, // -1 means all 
+          'posts_per_page' => 2, // -1 means all 
           'post_type' => 'event',
           'meta_key' => 'event_date', //to sort by the date Custom Field
           'orderby' => 'meta_value_num', // title for the title of the post, post-date is the default, use rand for random, use meta_value to sort by a custom field (like the date custom field we created)
-          'order' => 'ASC' //default is DESC
+          'order' => 'ASC', //default is DESC
+          'meta_query' => array( //Adding this will cause the query to only return values that are equal to or greater than today
+              array(
+                'key' => 'event_date',
+                'compare' => '>=',
+                'value' => $today, //date(Ymd)
+                'type' => 'numeric'
+              )
+          )
     )); 
 
     while($homepageEvents->have_posts()) {
@@ -50,6 +60,7 @@
 <?php
     //the_field and get_field are custom funtions made available be the Custom Fields plugin. 
     //the_fiels will echo out the field and get_field will just return it
+    
     $eventDate = new DateTime(get_field('event_date'));
     echo $eventDate->format('M');
     //the_time('M') 
