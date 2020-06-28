@@ -1,5 +1,6 @@
 <?php 
-    
+    //This is for all events
+    //this is a tempalate file
     get_header();
 
 ?>

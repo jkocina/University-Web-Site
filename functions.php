@@ -72,11 +72,31 @@ function university_adjust_queries($query) {
                                             )
                                         )
                     );
-
     }
-    
 
+    //program query
+    //is admin will test if on the admin page
+    //is post type archive will test the post type archive
+    //is main query will test if its the default wordpress query loading on the page as opposed to a custom query
+    if (!is_admin() AND is_post_type_archive('program') AND $query->is_main_query()) {
+        
+        //This will restrict the posts to page to one
+        $query->set('posts_per_page',-1);    
+        //$query->set('meta_key', 'program_title'); //to sort by the date Custom Field)
+        $query->set('orderby', 'title'); // title for the title of the post, post-date is the default, use rand for random, use meta_value to sort by a custom field (like the date custom field we created)
+        $query->set('order','ASC'); //Default is  DESC
+        // $query->set('meta_query', array( //Adding this will cause the query to only return values that are equal to or greater than today
+        //                                 array(
+        //                                     'key' => 'event_date',
+        //                                     'compare' => '>=',
+        //                                     'value' => $today, //date(Ymd)
+        //                                     'type' => 'numeric'
+        //                                     )
+        //                                 )
+        //             );
+    }
 }
+
 add_action('pre_get_posts', 'university_adjust_queries');
 
 ?>

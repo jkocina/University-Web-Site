@@ -3,10 +3,6 @@
 #this is a template file
 
     get_header();
-
-    while(have_posts()) {
-        //Gets the post data ready for parsing 
-        the_post();
 ?>
   <!-- Page Banner  -->
   <div class="page-banner">
@@ -18,7 +14,12 @@
       </div>
     </div>  
   </div>      
+<?php
 
+    while(have_posts()) {
+        //Gets the post data ready for parsing 
+        the_post();
+?>
   <!-- Content begins -->
   <div class="container container--narrow page-section">
     <!-- metabox -->
@@ -30,7 +31,6 @@
   
   </div>
   <hr>
-
 <?php
     }
 
