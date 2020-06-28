@@ -27,11 +27,10 @@
     <div class="metabox metabox--position-up metabox--with-home-link">
       <p><a class="metabox__blog-home-link" href="<?= get_post_type_archive_link('program') ?>"><i class="fa fa-home" aria-hidden="true"></i> All Programs </a> <span class="metabox__main"><?php the_title(); ?></span></p>
     </div>
-    <h3> Summary:</h3>
     <div class="generic-content"><?=  the_content() ?></div>
 
-    <hr>
-    <h3>Related Events:</h3>
+    <hr class="section-break">
+    
 <?php
      
     $today = date('Ymd');
@@ -56,32 +55,35 @@
             )
         )
     )); 
+    
+    //This will test and see if that are any posts in the associated events array
+    if ($associatiedEvents->have_posts())  {
 
-    while($associatiedEvents->have_posts()) {
+        echo "<h3 class=\"headline headline--medium\" style=\"margin-bottom:.6rem;\">Upcoming " . get_the_title(). " Events:</h3>";
 
-        $associatiedEvents->the_post();
+        while($associatiedEvents->have_posts()) {
+
+            $associatiedEvents->the_post();
 ?>
       <div class="event-summary">
         <a class="event-summary__date t-center" href="#">
           <span class="event-summary__month">
 <?php
-// This is a new batch of PHP and is not following the previous indentation
-//the_field and get_field are custom funtions made available be the Custom Fields plugin. 
-//the_fiels will echo out the field and get_field will just return it
+            //the_field and get_field are custom funtions made available be the Custom Fields plugin. 
+            //the_fiels will echo out the field and get_field will just return it
 
-    $eventDate = new DateTime(get_field('event_date'));
-    echo $eventDate->format('M');
-    //the_time('M') 
+            $eventDate = new DateTime(get_field('event_date'));
+            echo $eventDate->format('M');
+            //the_time('M') 
 ?>            
         </span>
         <span class="event-summary__day">
 <?php 
-    // This is a new batch of PHP and is not following the previous indentation
-    //the_field and get_field are custom funtions made available be the Custom Fields plugin. 
-    //the_fiels will echo out the field and get_field will just return it
-    $eventDate = new DateTime(get_field('event_date'));
-    echo $eventDate->format('d'); 
-    //the_time('d') 
+            //the_field and get_field are custom funtions made available be the Custom Fields plugin. 
+            //the_fiels will echo out the field and get_field will just return it
+            $eventDate = new DateTime(get_field('event_date'));
+            echo $eventDate->format('d'); 
+            //the_time('d') 
 ?>
         </span>  
       </a>
@@ -90,19 +92,20 @@
         <p>
 <?php
 
-    if(has_excerpt()) {
-        
-        echo wp_trim_words(get_the_excerpt(), 21);  //using the_excerpt() will echo it out with a p tag
-    } else {
-        
-        echo wp_trim_words(get_the_content(), 21); //using the_content() will echo it out with a p tag
-    }      
+            if(has_excerpt()) {
+                
+                echo wp_trim_words(get_the_excerpt(), 21);  //using the_excerpt() will echo it out with a p tag
+            } else {
+                
+                echo wp_trim_words(get_the_content(), 21); //using the_content() will echo it out with a p tag
+            }      
 ?>              
           <a href="<?php the_permalink() ?>" class="nu gray">Learn more</a></p>
       </div>
     </div>
 <?php
-    } wp_reset_postdata(); //ends the while loop 
+        } wp_reset_postdata(); //ends the while loop
+    }
 ?>  
   </div>
   <hr>
