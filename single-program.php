@@ -30,13 +30,44 @@
     <div class="generic-content"><?=  the_content() ?></div>
 
     <hr class="section-break">
-    
+
 <?php
-     
+    //This is were we list professors that teach this event
+    $today = date('Ymd');
+
+    $associatiedProfessors = New WP_Query(array(
+        'posts_per_page' => -1, // -1 means all 
+        'post_type' => 'professor',
+        'meta_key' => '',
+        'order' => 'ASC', //default is DESC
+        'meta_query' => array( 
+            array( 
+              'key' => 'related_programs', // If multiple values, Wordpress will serialize the array. i.e. array(12, 120, 57) === a:3:{i:0;i:"12";i:1;i:"120";i:2;i:"1200";}
+              'compare' => 'LIKE',
+              'value' => '"' . get_the_ID() . '"' // Gets the ID of the current program. Because the array of results are serialize, 
+            )
+        )
+    )); 
+    
+    // this will echo out all the professors
+    // echo "<pre>";
+    // echo print_r($associatiedProfessors);
+    // echo "</pre>";
+
+    while($associatiedProfessors->have_posts()) {
+        $associatiedProfessors->the_post();
+?>
+
+<?php
+
+    }  wp_reset_postdata();
+?>
+<?php
+    //This is were we list events that are related to the programs 
     $today = date('Ymd');
 
     $associatiedEvents = New WP_Query(array(
-        'posts_per_page' => 2, // -1 means all 
+        'posts_per_page' => -1, // -1 means all 
         'post_type' => 'event',
         'meta_key' => 'event_date', //use meta key to sort by the event_date custom field
         'orderby' => 'meta_value_num', // choose title for the title of the post(maybe without the meta_key?), post-date is the default sort by, use rand for random sorting, use meta_value to sort by a custom field (like the event_date custom field we created)
